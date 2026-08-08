@@ -515,6 +515,187 @@
 </section>
 
 
+<style>
+
+.game-rates-section {
+  width: 100%;
+  padding: 55px 5% 65px;
+  background: #f5f6f8;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.game-rates-section h2 {
+  margin: 0;
+  text-align: center;
+  color: #17263d;
+  font-size: 42px;
+  font-weight: 700;
+}
+
+.game-rates-subtitle {
+  margin: 8px 0 30px;
+  text-align: center;
+  color: #687080;
+  font-size: 19px;
+}
+
+.game-rates-box {
+  max-width: 1400px;
+  margin: auto;
+
+  padding: 28px;
+
+  border-radius: 30px;
+
+  background: rgba(255, 240, 216, 0.78);
+
+  box-shadow:
+    0 12px 30px rgba(0,0,0,.08);
+
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 18px 20px;
+}
+
+
+/* GAME CARD */
+
+.game-rate-card {
+
+  min-height: 82px;
+
+  padding: 0 22px;
+
+  border-radius: 22px;
+
+  background: rgba(255,250,240,.95);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  border-left: 7px solid #3474d2;
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,.06);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+
+}
+
+.game-rate-card:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 22px rgba(0,0,0,.10);
+
+}
+
+
+/* GAME NAME */
+
+.game-rate-card span {
+
+  font-size: 20px;
+
+  font-weight: 600;
+
+  color: #202020;
+
+}
+
+
+/* RATE */
+
+.game-rate-card b {
+
+  background:
+    linear-gradient(
+      135deg,
+      #347bd5,
+      #2458ad
+    );
+
+  color: white;
+
+  padding: 13px 20px;
+
+  border-radius: 16px;
+
+  font-size: 16px;
+
+  white-space: nowrap;
+
+  box-shadow:
+    0 5px 12px rgba(45,90,170,.25);
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+  .game-rates-section {
+    padding: 40px 14px 50px;
+  }
+
+  .game-rates-section h2 {
+    font-size: 29px;
+  }
+
+  .game-rates-subtitle {
+    font-size: 15px;
+    margin-bottom: 22px;
+  }
+
+  .game-rates-box {
+
+    grid-template-columns: 1fr;
+
+    padding: 16px;
+
+    gap: 12px;
+
+    border-radius: 22px;
+
+  }
+
+  .game-rate-card {
+
+    min-height: 68px;
+
+    padding: 0 14px;
+
+    border-radius: 17px;
+
+  }
+
+  .game-rate-card span {
+    font-size: 15px;
+  }
+
+  .game-rate-card b {
+
+    padding: 9px 12px;
+
+    border-radius: 12px;
+
+    font-size: 12px;
+
+  }
+
+}
+
+</style>
+
 
 
 

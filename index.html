@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Worli Matka</title>
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f6f8;
+      color: #333;
+      min-height: 100vh;
+    }
+
+    header {
+      height: 72px;
+      background: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 10%;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .logo { font-size: 22px; font-weight: 700; color: #222; }
+    .logo span { color: #315fa8; }
+
+    .download-btn {
+      text-decoration: none;
+      background: linear-gradient(135deg, #3979d8, #2456a0);
+      color: #fff;
+      padding: 11px 22px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 4px 12px rgba(45, 99, 175, 0.25);
+      transition: 0.2s ease;
+    }
+
+    .download-btn:hover { transform: translateY(-1px); }
+
+    .hero {
+      min-height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      padding: 0 20px 145px;
+      background: radial-gradient(circle at 50% 45%, rgba(255,255,255,0.9), rgba(245,246,248,0.8) 50%, #f3f4f6 100%);
+    }
+
+    .info-card {
+      width: min(820px, 100%);
+      background: rgba(255, 249, 239, 0.92);
+      border: 1px solid rgba(220, 210, 190, 0.35);
+      border-radius: 24px;
+      padding: 25px 24px 26px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+      backdrop-filter: blur(8px);
+    }
+
+    .info-text {
+      max-width: 700px;
+      font-size: 14px;
+      line-height: 1.28;
+      color: #444;
+      margin-bottom: 18px;
+    }
+
+    .card-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: linear-gradient(135deg, #3979d8, #2456a0);
+      color: white;
+      padding: 13px 27px;
+      border-radius: 25px;
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: 0 5px 14px rgba(40, 91, 160, 0.25);
+    }
+
+    .rates-section {
+      width: 100%;
+      padding: 55px 5% 70px;
+      text-align: center;
+      background: #f5f6f8;
+    }
+
+    .rates-section h2, .winners-section h2, .timings-section h2, .faq-section h2 {
+      margin: 0;
+      font-size: 42px;
+      font-weight: 700;
+      color: #293d6d;
+    }
+
+    .subtitle, .timings-subtitle, .faq-subtitle {
+      margin: 8px 0 28px;
+      color: #687080;
+      font-size: 19px;
+    }
+
+    .rates-box {
+      max-width: 1380px;
+      margin: auto;
+      padding: 28px;
+      border-radius: 30px;
+      background: rgba(255, 239, 211, 0.75);
+      box-shadow: 0 12px 30px rgba(0,0,0,.08);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 20px;
+    }
+
+    .rate-item {
+      min-height: 82px;
+      padding: 0 22px;
+      border-radius: 22px;
+      background: rgba(255,250,240,.9);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-left: 7px solid #3474d2;
+      box-shadow: 0 5px 15px rgba(0,0,0,.05);
+      text-align: left;
+    }
+
+    .rate-item span { font-size: 20px; font-weight: 600; color: #454545; }
+
+    .rate-item b {
+      background: linear-gradient(135deg,#3e7cdb,#285bb1);
+      color: white;
+      padding: 13px 20px;
+      border-radius: 16px;
+      font-size: 16px;
+      white-space: nowrap;
+    }
+
+    .winners-section {
+      width: 100%;
+      padding: 55px 5%;
+      background: #f5f6f8;
+      text-align: center;
+    }
+
+    .winners-box {
+      max-width: 1400px;
+      margin: auto;
+      padding: 30px;
+      border-radius: 30px;
+      background: rgba(255, 240, 216, 0.78);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.07);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .winner-card {
+      position: relative;
+      min-height: 175px;
+      padding: 25px;
+      text-align: left;
+      background: rgba(255,250,240,0.95);
+      border: 1px solid rgba(225,215,195,.5);
+      border-radius: 22px;
+      box-shadow: 0 5px 15px rgba(0,0,0,.06);
+      overflow: hidden;
+      animation: cardIn .4s ease;
+    }
+
+    .winner-card h3 { margin: 0 0 8px; font-size: 23px; color: #315fa8; }
+    .winner-name { font-size: 18px; font-weight: 600; color: #444; }
+    .winner-amount { margin-top: 12px; font-size: 30px; font-weight: 700; color: #293d6d; }
+
+    .win-ribbon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 95px;
+      height: 35px;
+      background: #3474d2;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      transform: rotate(35deg) translate(17px,-10px);
+    }
+
+    .demo-note {
+      margin-top: 22px;
+      color: #687080;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    @keyframes cardIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .timings-section {
+      width: 100%;
+      padding: 55px 3%;
+      background: #f5f6f8;
+    }
+
+    .timings-section h2, .faq-section h2 { text-align: center; }
+
+    .timings-subtitle { text-align: center; }
+
+    .timings-card {
+      max-width: 1400px;
+      margin: auto;
+      padding: 28px 30px;
+      border-radius: 30px;
+      background: rgba(255, 240, 216, .72);
+      box-shadow: 0 12px 30px rgba(0,0,0,.07);
+    }
+
+    .timings-table { width: 100%; overflow: hidden; border-radius: 24px; }
+
+    .table-head, .table-row {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      align-items: center;
+    }
+
+    .table-head {
+      background: linear-gradient(135deg,#347bd5,#2458ad);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      min-height: 62px;
+      text-align: center;
+    }
+
+    .table-row {
+      min-height: 62px;
+      background: rgba(255, 250, 240, .88);
+      border-bottom: 1px solid rgba(100,100,100,.08);
+      color: #263c6d;
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .table-row div { text-align: center; }
+    .table-row div:first-child { text-align: left; padding-left: 18px; }
+
+    .faq-section {
+      width: 100%;
+      padding: 65px 4%;
+      background: #f5f6f8;
+    }
+
+    .faq-subtitle { text-align: center; margin: 8px auto 32px; font-size: 17px; }
+
+    .faq-grid {
+      max-width: 1400px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .faq-card {
+      min-height: 105px;
+      padding: 23px 25px;
+      border-radius: 22px;
+      background: rgba(255, 250, 240, .88);
+      border: 1px solid rgba(220, 215, 205, .45);
+      box-shadow: 0 7px 20px rgba(0,0,0,.06);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .faq-card:hover { transform: translateY(-3px); background: #fffaf0; }
+    .faq-card h3 { margin: 0 0 12px; color: #315fa8; font-size: 20px; }
+    .faq-card p { margin: 0; color: #555; font-size: 15px; }
+
+    .faq-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(20, 30, 50, .45);
+      backdrop-filter: blur(5px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+    }
+
+    .faq-popup {
+      position: relative;
+      width: min(520px, 100%);
+      padding: 35px 30px;
+      border-radius: 25px;
+      background: #fffaf0;
+      box-shadow: 0 25px 70px rgba(0,0,0,.25);
+      animation: popupIn .25s ease;
+    }
+
+    .faq-popup h2 { margin: 0 35px 15px 0; text-align: left; font-size: 25px; }
+    .faq-popup p { margin: 0; color: #555; font-size: 16px; line-height: 1.6; }
+
+    .faq-close {
+      position: absolute;
+      right: 18px;
+      top: 15px;
+      width: 36px;
+      height: 36px;
+      border: none;
+      border-radius: 50%;
+      background: #347bd5;
+      color: white;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    @keyframes popupIn {
+      from { opacity: 0; transform: scale(.92) translateY(10px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .download-cta {
+      width: calc(100% - 14%);
+      margin: 30px auto 70px;
+      padding: 32px 20px 40px;
+      text-align: center;
+      border-radius: 30px;
+      background: linear-gradient(135deg,#347bdc,#1859bd);
+      color: white;
+      box-shadow: 0 15px 35px rgba(30, 82, 170, .25);
+    }
+
+    .download-cta h2 { margin: 0 0 8px; font-size: 40px; }
+    .download-cta p { margin: 0 0 25px; font-size: 17px; }
+
+    .cta-button {
+      display: inline-block;
+      padding: 14px 38px;
+      border-radius: 30px;
+      background: #fffaf0;
+      color: #315fa8;
+      text-decoration: none;
+      font-size: 18px;
+      font-weight: 700;
+      box-shadow: 0 6px 18px rgba(0,0,0,.15);
+    }
+
+    .site-footer {
+      background: radial-gradient(circle at top,#183b69 0%,#0b1930 55%,#071120 100%);
+      color: white;
+      padding: 60px 7% 20px;
+    }
+
+    .footer-container {
+      max-width: 1250px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 24px;
+    }
+
+    .footer-box {
+      min-height: 300px;
+      padding: 25px;
+      border-radius: 22px;
+      background: rgba(30, 66, 112, .40);
+      border: 1px solid rgba(120,180,240,.25);
+    }
+
+    .footer-box h3 { margin: 0 0 20px; color: #76d8ff; font-size: 21px; }
+    .footer-box p { margin: 0 0 15px; color: #f0f4f8; font-size: 14px; line-height: 1.75; }
+
+    .footer-box a {
+      display: block;
+      padding: 9px 0;
+      color: #f2f5f8;
+      text-decoration: none;
+      font-size: 14px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .footer-bottom {
+      max-width: 1250px;
+      margin: 30px auto 0;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .footer-bottom p, .footer-bottom a { color: #aebdce; font-size: 13px; text-decoration: none; }
+    .footer-bottom a { margin-left: 20px; }
+
+    @media(max-width:1000px) {
+      .footer-container { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media(max-width:800px) {
+      .winners-section, .faq-section { padding: 40px 14px; }
+      .winners-section h2, .faq-section h2, .timings-section h2, .rates-section h2 { font-size: 30px; }
+      .winners-box, .faq-grid { grid-template-columns: 1fr; }
+      .rates-box { grid-template-columns: 1fr; padding: 16px; }
+    }
+
+    @media(max-width:700px) {
+      header { height: 65px; padding: 0 20px; }
+      .logo { font-size: 19px; }
+      .download-btn { padding: 9px 16px; font-size: 12px; }
+      .hero { min-height: calc(100vh - 65px); padding: 0 14px 100px; }
+      .table-head { min-height: 52px; font-size: 13px; }
+      .table-row { min-height: 55px; font-size: 13px; }
+      .table-row div:first-child { padding-left: 10px; }
+    }
+
+    @media(max-width:600px) {
+      .download-cta { width: calc(100% - 28px); margin: 20px auto 45px; padding: 28px 15px 35px; }
+      .download-cta h2 { font-size: 28px; }
+      .download-cta p { font-size: 14px; }
+      .cta-button { padding: 12px 28px; font-size: 15px; }
+      .site-footer { padding: 40px 14px 20px; }
+      .footer-container { grid-template-columns: 1fr; gap: 14px; }
+      .footer-box { min-height: auto; padding: 22px; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .footer-bottom a { margin: 0 7px; }
+    }
+
+    @media(max-width:400px) {
+      .faq-card h3 { font-size: 16px; }
+      .faq-card p { font-size: 13px; }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="logo"><span>Worli</span> Matka</div>
+  <a href="worlimtk.apk" class="download-btn">Download App</a>
+</header>
+
+<main class="hero">
+  <div class="info-card">
+    <div class="info-text">
+      Welcome to Worli Matka. Enjoy our platform and explore the
+      available features and information. Please use the service
+      only where legally permitted and follow all applicable
+      laws and age requirements.
+    </div>
+    <a href="worlimtk.apk" class="card-btn">Download Worli Matka App</a>
+  </div>
+</main>
+
+<section class="rates-section" id="rates">
+  <h2>Game Information</h2>
+  <p class="subtitle">Information about available game formats.</p>
+  <div class="rates-box">
+    <div class="10-100"><span>Game Type 1</span><b>Single</b></div>
+    <div class="10-1000"><span>Game Type 2</span><b>Jodi</b></div>
+    <div class="10-1600"><span>Game Type 3</span><b>Single Patti</b></div>
+    <div class="10-3200"><span>Game Type 4</span><b>Double Patti</b></div>
+    <div class="10-10000"><span>Game Type 5</span><b>Triple Patti</b></div>
+    <div class="10-10000"><span>Game Type 6</span><b>Half Sangam</b></div>
+    <div class="10-100000"><span>Game Type 7</span><b>Full Sangam</b></div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- =========================
+     WORLI MATKA DEMO WINNERS
+     UI PREVIEW ONLY
+========================= -->
+
+<!-- TODAY'S TOP WINNERS - DEMO UI PREVIEW -->
+<section class="winners-section" id="results">
+
+  <h2>Today's Top Winners</h2>
+  <p class="winners-subtitle">Latest demo winners from popular markets.</p>
+
+  <div class="winners-box" id="winnersBox">
+
+    <!-- Cards are present in HTML immediately -->
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Rajdhani Day</h3>
+      <div class="winner-name">Amit Sharma</div>
+      <div class="winner-amount">₹7,800</div>
+    </div>
+
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Madhur Day</h3>
+      <div class="winner-name">Neha Verma</div>
+      <div class="winner-amount">₹75,000</div>
+    </div>
+
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Main Bazar</h3>
+      <div class="winner-name">Rahul Singh</div>
+      <div class="winner-amount">₹18,500</div>
+    </div>
+
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Milan Day</h3>
+      <div class="winner-name">Priya Jain</div>
+      <div class="winner-amount">₹41,000</div>
+    </div>
+
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Kalyan Night</h3>
+      <div class="winner-name">Vikas Kumar</div>
+      <div class="winner-amount">₹32,000</div>
+    </div>
+
+    <div class="winner-card">
+      <div class="win-ribbon">DEMO</div>
+      <h3>Rajdhani Night</h3>
+      <div class="winner-name">Anjali Meena</div>
+      <div class="winner-amount">₹56,500</div>
+    </div>
+
+  </div>
+
+  <div class="demo-note">
+    Demo data only for UI preview. Replace with verified live data before publishing.
+  </div>
+
+</section>
+
+<style>
+.winners-section{
+  width:100%;
+  padding:55px 5%;
+  background:#f5f6f8;
+  font-family:Arial,Helvetica,sans-serif;
+  text-align:center;
+}
+.winners-section h2{
+  margin:0;
+  color:#293d6d;
+  font-size:42px;
+  font-weight:700;
+}
+.winners-subtitle{
+  margin:8px 0 30px;
+  color:#687080;
+  font-size:19px;
+}
+.winners-box{
+  max-width:1400px;
+  margin:auto;
+  padding:30px;
+  border-radius:30px;
+  background:rgba(255,240,216,.78);
+  box-shadow:0 10px 30px rgba(0,0,0,.07);
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
+}
+.winner-card{
+  position:relative;
+  min-height:175px;
+  padding:25px;
+  text-align:left;
+  background:rgba(255,250,240,.95);
+  border:1px solid rgba(225,215,195,.5);
+  border-radius:22px;
+  box-shadow:0 5px 15px rgba(0,0,0,.06);
+  overflow:hidden;
+  animation:winnerIn .4s ease;
+}
+.winner-card h3{
+  margin:0 0 8px;
+  font-size:23px;
+  color:#315fa8;
+}
+.winner-name{
+  font-size:18px;
+  font-weight:600;
+  color:#444;
+}
+.winner-amount{
+  margin-top:12px;
+  font-size:30px;
+  font-weight:700;
+  color:#293d6d;
+}
+.win-ribbon{
+  position:absolute;
+  top:0;
+  right:0;
+  width:95px;
+  height:35px;
+  background:#3474d2;
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:12px;
+  font-weight:bold;
+  transform:rotate(35deg) translate(17px,-10px);
+}
+.demo-note{
+  margin-top:22px;
+  color:#687080;
+  font-size:16px;
+  font-weight:600;
+}
+@keyframes winnerIn{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@media(max-width:800px){
+  .winners-section{padding:40px 14px}
+  .winners-section h2{font-size:30px}
+  .winners-subtitle{font-size:15px}
+  .winners-box{
+    grid-template-columns:1fr;
+    padding:16px;
+    gap:14px;
+    border-radius:22px
+  }
+  .winner-card{min-height:145px}
+  .winner-card h3{font-size:20px}
+  .winner-name{font-size:16px}
+  .winner-amount{font-size:27px}
+}
+</style>
+
+<script>
+(function(){
+
+  const demoWinners = [
+    ["Rajdhani Day","Amit Sharma","₹7,800"],
+    ["Madhur Day","Neha Verma","₹75,000"],
+    ["Main Bazar","Rahul Singh","₹18,500"],
+    ["Milan Day","Priya Jain","₹41,000"],
+    ["Kalyan Night","Vikas Kumar","₹32,000"],
+    ["Rajdhani Night","Anjali Meena","₹56,500"],
+    ["Time Bazar","Rohit Gupta","₹12,400"],
+    ["Madhur Night","Sneha Singh","₹68,000"],
+    ["Milan Night","Arjun Verma","₹25,500"],
+    ["Kalyan","Pooja Sharma","₹48,500"],
+    ["Sridevi Night","Karan Jain","₹21,500"]
+  ];
+
+  function updateWinners(){
+    const box = document.getElementById("winnersBox");
+    if(!box) return;
+
+    /* Randomly select 6 demo records */
+    const shuffled = demoWinners
+      .map(x => ({x, r: Math.random()}))
+      .sort((a,b) => a.r-b.r)
+      .slice(0,6)
+      .map(o => o.x);
+
+    box.innerHTML = shuffled.map(item => `
+      <div class="winner-card">
+        <div class="win-ribbon">DEMO</div>
+        <h3>${item[0]}</h3>
+        <div class="winner-name">${item[1]}</div>
+        <div class="winner-amount">${item[2]}</div>
+      </div>
+    `).join("");
+  }
+
+  /* Cards are already visible from HTML.
+     JS only changes them after 5 seconds. */
+  setInterval(updateWinners, 5000);
+
+})();
+</script>
+
+<section class="timings-section" id="timings">
+  <h2>Popular Market Timings</h2>
+  <p class="timings-subtitle">Open and close timing information.</p>
+
+  <div class="timings-card">
+    <div class="timings-table">
+      <div class="table-head">
+        <div>Market</div><div>Open Time</div><div>Close Time</div>
+      </div>
+      <div class="table-row"><div>Time Bazar</div><div>01:05 PM</div><div>02:05 PM</div></div>
+      <div class="table-row"><div>Madhur Day</div><div>01:35 PM</div><div>02:35 PM</div></div>
+      <div class="table-row"><div>Milan Day</div><div>03:15 PM</div><div>05:15 PM</div></div>
+      <div class="table-row"><div>Rajdhani Day</div><div>03:10 PM</div><div>05:10 PM</div></div>
+      <div class="table-row"><div>Kalyan</div><div>03:45 PM</div><div>05:45 PM</div></div>
+      <div class="table-row"><div>Sridevi Night</div><div>07:15 PM</div><div>08:15 PM</div></div>
+      <div class="table-row"><div>Madhur Night</div><div>08:40 PM</div><div>10:40 PM</div></div>
+      <div class="table-row"><div>Milan Night</div><div>09:05 PM</div><div>11:05 PM</div></div>
+      <div class="table-row"><div>Rajdhani Night</div><div>09:35 PM</div><div>11:50 PM</div></div>
+      <div class="table-row"><div>Kalyan Night</div><div>09:40 PM</div><div>11:45 PM</div></div>
+      <div class="table-row"><div>Main Bazar</div><div>10:00 PM</div><div>12:10 AM</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="features">
+  <h2>Frequently Asked Questions</h2>
+  <p class="faq-subtitle">Important questions ke answers popup me clean aur premium style me open honge.</p>
+
+  <div class="faq-grid">
+    <div class="faq-card" onclick="openFAQ(0)"><h3>App download kaise karein?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(1)"><h3>Minimum deposit kitna hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(2)"><h3>Minimum withdrawal kitna hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(3)"><h3>Minimum bid amount kya hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(4)"><h3>Support kab available hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(5)"><h3>Market timing kahan milegi?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(6)"><h3>Starline timing kya hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(7)"><h3>Game rates kahan check karein?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(8)"><h3>App mobile friendly hai?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(9)"><h3>WhatsApp support kaise milega?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(10)"><h3>Results kab update hote hain?</h3><p>Click karke answer dekhein</p></div>
+    <div class="faq-card" onclick="openFAQ(11)"><h3>Website kis theme me hai?</h3><p>Click karke answer dekhein</p></div>
+  </div>
+</section>
+
+<div class="faq-overlay" id="faqOverlay" onclick="closeFAQ(event)">
+  <div class="faq-popup">
+    <button class="faq-close" onclick="closeFAQ()">×</button>
+    <h2 id="faqTitle"></h2>
+    <p id="faqAnswer"></p>
+  </div>
+</div>
+
+<script>
+const faqData = [
+  {title:"App download kaise karein?",answer:"Download option par click karke available application information aur installation instructions dekhein."},
+  {title:"Minimum deposit kitna hai?",answer:"Current minimum amount ki verified information application ya official information section me check karein."},
+  {title:"Minimum withdrawal kitna hai?",answer:"Current withdrawal requirements aur applicable limits ke liye official information check karein."},
+  {title:"Minimum bid amount kya hai?",answer:"Applicable rules aur minimum amount ki current verified information official source par available hogi."},
+  {title:"Support kab available hai?",answer:"Support availability aur response hours official support channel par check karein."},
+  {title:"Market timing kahan milegi?",answer:"Available timing information website ke Market Timings section me dekhi ja sakti hai."},
+  {title:"Starline timing kya hai?",answer:"Current timing information ke liye website ke latest verified timing section ko refer karein."},
+  {title:"Game rates kahan check karein?",answer:"Available information aur applicable rates ke liye website ke relevant information section ko check karein."},
+  {title:"App mobile friendly hai?",answer:"Haan, interface responsive design ke saath mobile, tablet aur desktop screens ke liye optimized hai."},
+  {title:"WhatsApp support kaise milega?",answer:"Official support contact details website ke Support section me available honge."},
+  {title:"Results kab update hote hain?",answer:"Latest verified updates available hone par website ke relevant results section me display kiye jayenge."},
+  {title:"Website kis theme me hai?",answer:"Website clean blue, white aur soft cream color palette ke saath responsive premium-style interface use karti hai."}
+];
+
+function openFAQ(index) {
+  const faq = faqData[index];
+  document.getElementById("faqTitle").textContent = faq.title;
+  document.getElementById("faqAnswer").textContent = faq.answer;
+  document.getElementById("faqOverlay").style.display = "flex";
+}
+
+function closeFAQ(event) {
+  if (!event || event.target.id === "faqOverlay" || event.target.classList.contains("faq-close")) {
+    document.getElementById("faqOverlay").style.display = "none";
+  }
+}
+</script>
+
+<section class="download-cta" id="download">
+  <h2>Download Worli Matka App</h2>
+  <p>Simple, clean and premium mobile-friendly app experience.</p>
+  <a href="worlimtk.apk" class="cta-button">Download App Now</a>
+</section>
+
+<footer class="site-footer" id="contact">
+  <div class="footer-container">
+
+    <div class="footer-box">
+      <h3>Worli Matka</h3>
+      <p>
+        Worli Matka is a mobile-friendly information website where users
+        can explore available market information, application details
+        and support resources.
+      </p>
+    </div>
+
+    <div class="footer-box">
+      <h3>Popular Markets</h3>
+      <a href="#timings">Main Bazar</a>
+      <a href="#timings">Kalyan</a>
+      <a href="#timings">Milan Day</a>
+      <a href="#timings">Madhur Day</a>
+      <a href="#timings">Rajdhani Day</a>
+      <a href="#timings">Rajdhani Night</a>
+      <a href="#timings">Time Bazar</a>
+      <a href="#timings">Milan Night</a>
+    </div>
+
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <a href="#home">Home</a>
+      <a href="#rates">Game Information</a>
+      <a href="#results">Today's Results</a>
+      <a href="#download">Download App</a>
+      <a href="#contact">Contact Support</a>
+      <a href="#features">App Features</a>
+    </div>
+
+    <div class="footer-box">
+      <h3>Contact Info</h3>
+      <p>WhatsApp: YOUR VERIFIED NUMBER</p>
+      <p>Support: Official Support Channel</p>
+      <p>Support Hours: YOUR HOURS</p>
+      <p>Minimum Deposit: YOUR VERIFIED VALUE</p>
+      <p>Minimum Withdrawal: YOUR VERIFIED VALUE</p>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2026 Worli Matka. All rights reserved.</p>
+    <div>
+      <a href="#privacy">Privacy Policy</a>
+      <a href="#terms">Terms &amp; Conditions</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- ===================== WORLI MATKA DEMO WINNERS ===================== -->
+
+<!-- =================== END WORLI MATKA DEMO WINNERS =================== -->
+

@@ -851,7 +851,7 @@ src="https://www.facebook.com/tr?id=1361923405309336&ev=PageView&noscript=1"
   font-weight:bold;
   transform:rotate(35deg) translate(17px,-10px);
 }
-.demo-note{
+.Verified-note{
   margin-top:22px;
   color:#687080;
   font-size:16px;
@@ -881,7 +881,7 @@ src="https://www.facebook.com/tr?id=1361923405309336&ev=PageView&noscript=1"
 <script>
 (function(){
 
-  const demoWinners = [
+  const liveWinners = [
     ["Rajdhani Day","Amit Sharma","₹7,800"],
     ["Madhur Day","Neha Verma","₹75,000"],
     ["Main Bazar","Rahul Singh","₹18,500"],
@@ -899,7 +899,7 @@ src="https://www.facebook.com/tr?id=1361923405309336&ev=PageView&noscript=1"
     const box = document.getElementById("winnersBox");
     if(!box) return;
 
-    /* Randomly select 6 demo records */
+    /* Randomly select 6 live records */
     const shuffled = demoWinners
       .map(x => ({x, r: Math.random()}))
       .sort((a,b) => a.r-b.r)
@@ -908,7 +908,7 @@ src="https://www.facebook.com/tr?id=1361923405309336&ev=PageView&noscript=1"
 
     box.innerHTML = shuffled.map(item => `
       <div class="winner-card">
-        <div class="win-ribbon">DEMO</div>
+        <div class="win-ribbon">VERIFIED</div>
         <h3>${item[0]}</h3>
         <div class="winner-name">${item[1]}</div>
         <div class="winner-amount">${item[2]}</div>
